@@ -1,0 +1,148 @@
+{
+	"changeLanguagePage": {
+		"changeLanguageAppBarTitle": "语言",
+		"selectLanguage": "选择语言",
+		"englishString": "英语",
+		"hindiString": "印地语",
+		"arabicString": "阿拉伯",
+		"chineseString": "中文",
+		"confirmString": "改变语言？",
+		"sureDialogueString": "您确定要更改此语言设置吗？",
+		"closeString": "关",
+		"yesString": "是"
+	},
+
+	"loginPage": {
+		"signInWithPhoneNumberString": "用电话号码登录",
+		"phoneNumberString": "电话号码",
+		"continueString": "继续",
+		"weSendYouOTPString": "我们将发送OTP进行验证。",
+		"logInWithFacebookString": "用Facebook登录",
+		"logInWithGoogleString": "使用Google登录",
+		"pressBackOnceAgainString": "再次按返回以退出。"
+	},
+
+	"otpScreen": {
+		"verificationString": "验证",
+		"enterOtpString": "输入我们刚刚发送给您的电话的OTP代码。",
+		"didntGetOtpString": "没有收到OTP码！",
+		"resendString": "重发",
+		"submitString": "提交",
+		"pleaseWaitString": "请耐心等待.."
+	},
+
+	"homePage": {
+		"orderString": "订购",
+		"walletString": "钱包",
+		"profileString": "个人资料",
+		"pressBackOnceAgainString": "再次按返回以退出。"
+	},
+
+	"homeMainPage": {
+		"ordersString": "订单",
+		"newString": "新",
+		"activeString": "活性",
+		"historyString": "历史"
+	},
+
+	"newOrderPage": {
+		"noNewOrdersString": "没有新订单。",
+		"paymentModeString": "付款方式",
+		"acceptString": "接受",
+		"paymentString": "付款",
+		"reasonToRejectString": "拒绝理由",
+		"writeSpecificReasonString": "写下拒绝订单的具体原因",
+		"enterReasonHereString": "在此输入原因",
+		"cancelString": "取消",
+		"sendString": "发送",
+		"orderString": "订购",
+		"totalString": "总",
+		"locationString": "位置",
+		"pickupLocationString": "接人的地方",
+		"deliveryLocationString": "交货地点",
+		"customerString": "顾客",
+		"nameString": "名称",
+		"phoneString": "电话",
+		"rejectString": "拒绝"
+	},
+
+	"activeOrderPage": {
+		"paymentModeString": "付款方式",
+		"paymentString": "付款",
+		"orderString": "订购",
+		"totalString": "总",
+		"locationString": "位置",
+		"pickupLocationString": "接人的地方",
+		"deliveryLocationString": "交货地点",
+		"customerString": "顾客",
+		"nameString": "名称",
+		"phoneString": "电话",
+		"startString": "开始"
+	},
+
+	"historyPage": {
+		"paymentModeString": "付款方式",
+		"deliveredString": "已交付",
+		"paymentString": "付款"
+	},
+
+	"mapPage": {
+		"mapString": "地图",
+		"finishString": "完",
+		"orderString": "订购",
+		"totalString": "总",
+		"locationString": "位置",
+		"pickupLocationString": "接人的地方",
+		"deliveryLocationString": "交货地点",
+		"customerString": "顾客",
+		"nameString": "名称",
+		"phoneString": "电话",
+		"paymentString": "付款",
+		"okayString": "好的",
+		"congratulationString": "恭喜你！ 订单已完成。"
+	},
+
+	"walletPage": {
+		"earningString": "收益"
+	},
+
+	"profilePage": {
+		"profileString": "个人资料",
+		"notificationsString": "通知事项",
+		"languageString": "语言",
+		"settingsString": "设定值",
+		"inviteFriendsString": "邀请朋友",
+		"supportString": "支持",
+		"logoutString": "登出",
+		"sureLogoutString": "您确定要注销吗？",
+		"cancelString": "取消"
+	},
+
+	"editProfilePage": {
+		"saveString": "保存",
+		"fullNameString": "全名",
+		"passwordString": "密码",
+		"phoneString": "电话",
+		"emailString": "电子邮件",
+		"chooseOptionString": "选择选项",
+		"cameraString": "相机",
+		"uploadFromGalleryString": "从图库上传",
+		"changeFullNameString": "更改全名",
+		"enterYourFullNameString": "输入您的全名",
+		"cancelString": "取消",
+		"okayString": "好的",
+		"changeYourPasswordString": "更改您的密码",
+		"oldPasswordString": "旧密码",
+		"newPasswordString": "新密码",
+		"confirmNewPasswordString": "确认新密码",
+		"changePhoneNumberString": "更改电话号码",
+		"enterPhoneNumberString": "输入电话号码",
+		"changeEmailString": "更改电子邮件",
+		"enterYourEmailString": "输入你的电子邮箱地址"
+	},
+
+	"notificationPage": {
+		"notificationsString": "通知事项",
+		"noNotificationsString": "没有通知"
+	}
+}

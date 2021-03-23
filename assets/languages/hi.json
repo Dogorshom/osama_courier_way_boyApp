@@ -1,0 +1,148 @@
+{
+	"changeLanguagePage": {
+		"changeLanguageAppBarTitle": "भाषा",
+		"selectLanguage": "भाषा का चयन करें",
+		"englishString": "अंग्रेज़ी",
+		"hindiString": "हिन्दी",
+		"arabicString": "अरबी",
+		"chineseString": "चीनी",
+		"confirmString": "भाषा बदलना चाहते है?",
+		"sureDialogueString": "क्या आप वाकई इस भाषा सेटिंग को बदलना चाहते हैं?",
+		"closeString": "बंद करे",
+		"yesString": "हाँ"
+	},
+
+	"loginPage": {
+		"signInWithPhoneNumberString": "फोन नंबर के साथ साइन इन करें",
+		"phoneNumberString": "फ़ोन नंबर",
+		"continueString": "जारी रखें",
+		"weSendYouOTPString": "हम सत्यापन के लिए OTP भेजेंगे।",
+		"logInWithFacebookString": "फेसबुक के साथ लॉगिन करे",
+		"logInWithGoogleString": "गूगल के साथ लॉगिन करे",
+		"pressBackOnceAgainString": "बाहर निकलने के लिए एक बार फिर से दबाएं।"
+	},
+
+	"otpScreen": {
+		"verificationString": "सत्यापन",
+		"enterOtpString": "हमारे द्वारा अभी भेजे गए फ़ोन से OTP कोड दर्ज करें।",
+		"didntGetOtpString": "OTP कोड प्राप्त नहीं हुआ!",
+		"resendString": "पुन: भेजें",
+		"submitString": "आगे बढ़े",
+		"pleaseWaitString": "कृपया प्रतीक्षा करें.."
+	},
+
+	"homePage": {
+		"orderString": "ऑर्डर",
+		"walletString": "बटुआ",
+		"profileString": "प्रोफ़ाइल",
+		"pressBackOnceAgainString": "बाहर निकलने के लिए एक बार फिर से दबाएं।"
+	},
+
+	"homeMainPage": {
+		"ordersString": "ऑर्डर्स",
+		"newString": "नया",
+		"activeString": "सक्रिय",
+		"historyString": "पिछले"
+	},
+
+	"newOrderPage": {
+		"noNewOrdersString": "कोई नया आर्डर नहीं",
+		"paymentModeString": "भुगतान का प्रकार",
+		"acceptString": "स्वीकार करें",
+		"paymentString": "भुगतान",
+		"reasonToRejectString": "अस्वीकार करने का कारण",
+		"writeSpecificReasonString": "ऑर्डर को अस्वीकार करने के लिए एक विशिष्ट कारण लिखें",
+		"enterReasonHereString": "यहाँ कारण दर्ज करें",
+		"cancelString": "रद्द करें",
+		"sendString": "भेजें",
+		"orderString": "ऑर्डर",
+		"totalString": "टोटल",
+		"locationString": "स्थान",
+		"pickupLocationString": "उठाने की जगह",
+		"deliveryLocationString": "प्रसव का स्थान",
+		"customerString": "ग्राहक",
+		"nameString": "नाम",
+		"phoneString": "फ़ोन",
+		"rejectString": "अस्वीकार"
+	},
+
+	"activeOrderPage": {
+		"paymentModeString": "भुगतान का प्रकार",
+		"paymentString": "भुगतान",
+		"orderString": "ऑर्डर",
+		"totalString": "टोटल",
+		"locationString": "स्थान",
+		"pickupLocationString": "उठाने की जगह",
+		"deliveryLocationString": "प्रसव का स्थान",
+		"customerString": "ग्राहक",
+		"nameString": "नाम",
+		"phoneString": "फ़ोन",
+		"startString": "शुरू"
+	},
+
+	"historyPage": {
+		"paymentModeString": "भुगतान का प्रकार",
+		"deliveredString": "पहुंचा दिया",
+		"paymentString": "भुगतान"
+	},
+
+	"mapPage": {
+		"mapString": "नक्शा",
+		"finishString": "समाप्त",
+		"orderString": "ऑर्डर",
+		"totalString": "टोटल",
+		"locationString": "स्थान",
+		"pickupLocationString": "उठाने की जगह",
+		"deliveryLocationString": "प्रसव का स्थान",
+		"customerString": "ग्राहक",
+		"nameString": "नाम",
+		"phoneString": "फ़ोन",
+		"paymentString": "भुगतान",
+		"okayString": "ठीक है",
+		"congratulationString": "बधाई हो! आर्डर पूरा हुआ।"
+	},
+
+	"walletPage": {
+		"earningString": "कमाई"
+	},
+
+	"profilePage": {
+		"profileString": "प्रोफ़ाइल",
+		"notificationsString": "सूचनाएं",
+		"languageString": "भाषा",
+		"settingsString": "समायोजन",
+		"inviteFriendsString": "मित्रों को आमंत्रित करें",
+		"supportString": "सहयोग",
+		"logoutString": "लॉग आउट",
+		"sureLogoutString": "आप निश्चित रूप से लॉगआउट करना चाहते हैं?",
+		"cancelString": "रद्द करें"
+	},
+
+	"editProfilePage": {
+		"saveString": "सहेजें",
+		"fullNameString": "पूरा नाम",
+		"passwordString": "पासवर्ड",
+		"phoneString": "फ़ोन",
+		"emailString": "ईमेल",
+		"chooseOptionString": "विकल्प चुनें",
+		"cameraString": "कैमरा",
+		"uploadFromGalleryString": "गैलरी से अपलोड करें",
+		"changeFullNameString": "पूरा नाम बदलें",
+		"enterYourFullNameString": "अपना पूरा नाम लिखे",
+		"cancelString": "रद्द करें",
+		"okayString": "ठीक है",
+		"changeYourPasswordString": "अपना पासवर्ड बदलें",
+		"oldPasswordString": "पुराना पासवर्ड",
+		"newPasswordString": "नया पासवर्ड",
+		"confirmNewPasswordString": "नए पासवर्ड की पुष्टि करें",
+		"changePhoneNumberString": "फ़ोन नंबर बदलें",
+		"enterPhoneNumberString": "फोन नंबर दर्ज करें",
+		"changeEmailString": "ई - मेल बदलें",
+		"enterYourEmailString": "अपना ईमेल दर्ज करें"
+	},
+
+	"notificationPage": {
+		"notificationsString": "सूचनाएं",
+		"noNotificationsString": "कोई सूचनाएं नहीं"
+	}
+}

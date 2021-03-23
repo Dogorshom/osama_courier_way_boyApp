@@ -1,0 +1,148 @@
+{
+	"changeLanguagePage": {
+		"changeLanguageAppBarTitle": "لغة",
+		"selectLanguage": "اختار اللغة",
+		"englishString": "الإنجليزية",
+		"hindiString": "الهندية",
+		"arabicString": "عربى",
+		"chineseString": "صينى",
+		"confirmString": "تغيير اللغة؟",
+		"sureDialogueString": "هل أنت متأكد أنك تريد تغيير إعداد اللغة هذا؟",
+		"closeString": "قريب",
+		"yesString": "نعم"
+	},
+
+	"loginPage": {
+		"signInWithPhoneNumberString": "تسجيل الدخول باستخدام رقم الهاتف",
+		"phoneNumberString": "رقم الهاتف",
+		"continueString": "استمر",
+		"weSendYouOTPString": "سنرسل OTP للتحقق.",
+		"logInWithFacebookString": "تسجيل الدخول باستخدام الفيسبوك",
+		"logInWithGoogleString": "تسجيل الدخول عبر جوجل",
+		"pressBackOnceAgainString": "اضغط على رجوع مرة أخرى للخروج."
+	},
+
+	"otpScreen": {
+		"verificationString": "التحقق",
+		"enterOtpString": "أدخل رمز OTP من الهاتف الذي أرسلناه لك للتو.",
+		"didntGetOtpString": "لم أتلق رمز OTP!",
+		"resendString": "إعادة إرسال",
+		"submitString": "إرسال",
+		"pleaseWaitString": "أرجو الإنتظار.."
+	},
+
+	"homePage": {
+		"orderString": "طلب",
+		"walletString": "محفظة نقود",
+		"profileString": "الملف الشخصي",
+		"pressBackOnceAgainString": "اضغط على رجوع مرة أخرى للخروج."
+	},
+
+	"homeMainPage": {
+		"ordersString": "طلب",
+		"newString": "جديد",
+		"activeString": "نشيط",
+		"historyString": "التاريخ"
+	},
+
+	"newOrderPage": {
+		"noNewOrdersString": "لا طلبات جديدة.",
+		"paymentModeString": "طريقة الدفع",
+		"acceptString": "قبول",
+		"paymentString": "دفع",
+		"reasonToRejectString": "سبب الرفض",
+		"writeSpecificReasonString": "اكتب سببًا محددًا لرفض الطلب",
+		"enterReasonHereString": "أدخل السبب هنا",
+		"cancelString": "إلغاء",
+		"sendString": "إرسال",
+		"orderString": "طلب",
+		"totalString": "مجموع",
+		"locationString": "موقعك",
+		"pickupLocationString": "اختر موقعا",
+		"deliveryLocationString": "موقع التسليم",
+		"customerString": "الزبون",
+		"nameString": "اسم",
+		"phoneString": "هاتف",
+		"rejectString": "رفض"
+	},
+
+	"activeOrderPage": {
+		"paymentModeString": "طريقة الدفع",
+		"paymentString": "دفع",
+		"orderString": "طلب",
+		"totalString": "مجموع",
+		"locationString": "موقعك",
+		"pickupLocationString": "اختر موقعا",
+		"deliveryLocationString": "موقع التسليم",
+		"customerString": "الزبون",
+		"nameString": "اسم",
+		"phoneString": "هاتف",
+		"startString": "بداية"
+	},
+
+	"historyPage": {
+		"paymentModeString": "طريقة الدفع",
+		"deliveredString": "تم التوصيل",
+		"paymentString": "دفع"
+	},
+
+	"mapPage": {
+		"mapString": "خريطة",
+		"finishString": "إنهاء",
+		"orderString": "طلب",
+		"totalString": "مجموع",
+		"locationString": "موقعك",
+		"pickupLocationString": "اختر موقعا",
+		"deliveryLocationString": "موقع التسليم",
+		"customerString": "الزبون",
+		"nameString": "اسم",
+		"phoneString": "هاتف",
+		"paymentString": "دفع",
+		"okayString": "حسنا",
+		"congratulationString": "تهنئة! تم اكتمال الطلب."
+	},
+
+	"walletPage": {
+		"earningString": "كسب"
+	},
+
+	"profilePage": {
+		"profileString": "الملف الشخصي",
+		"notificationsString": "إشعارات",
+		"languageString": "لغة",
+		"settingsString": "إعدادات",
+		"inviteFriendsString": "ادعو أصدقاء",
+		"supportString": "الدعم",
+		"logoutString": "تسجيل خروج",
+		"sureLogoutString": "هل تريد بالتأكيد تسجيل الخروج؟",
+		"cancelString": "إلغاء"
+	},
+
+	"editProfilePage": {
+		"saveString": "حفظ",
+		"fullNameString": "الاسم بالكامل",
+		"passwordString": "كلمه السر",
+		"phoneString": "هاتف",
+		"emailString": "البريد الإلكتروني",
+		"chooseOptionString": "إختر خيارا",
+		"cameraString": "الة تصوير",
+		"uploadFromGalleryString": "تحميل من المعرض",
+		"changeFullNameString": "تغيير الاسم الكامل",
+		"enterYourFullNameString": "أدخل اسمك الكامل",
+		"cancelString": "إلغاء",
+		"okayString": "حسنا",
+		"changeYourPasswordString": "غير كلمة المرور الخاصة بك",
+		"oldPasswordString": "كلمة سر قديمة",
+		"newPasswordString": "كلمة مرور جديدة",
+		"confirmNewPasswordString": "تأكيد كلمة المرور الجديدة",
+		"changePhoneNumberString": "غير رقم الهاتف",
+		"enterPhoneNumberString": "أدخل رقم الهاتف",
+		"changeEmailString": "تغيير البريد الالكتروني",
+		"enterYourEmailString": "أدخل عنوان بريدك الالكتروني"
+	},
+
+	"notificationPage": {
+		"notificationsString": "إشعارات",
+		"noNotificationsString": "لا إشعارات"
+	}
+}

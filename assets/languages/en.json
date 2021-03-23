@@ -1,0 +1,148 @@
+{
+	"changeLanguagePage": {
+		"changeLanguageAppBarTitle": "Language",
+		"selectLanguage": "Select Language",
+		"englishString": "English",
+		"hindiString": "Hindi",
+		"arabicString": "Arabic",
+		"chineseString": "Chinese",
+		"confirmString": "Change Language?",
+		"sureDialogueString": "Are you sure you want to change this language setting?",
+		"closeString": "Close",
+		"yesString": "Yes"
+	},
+
+	"loginPage": {
+		"signInWithPhoneNumberString": "Signin with Phone Number",
+		"phoneNumberString": "Phone Number",
+		"continueString": "Continue",
+		"weSendYouOTPString": "We'll send OTP for Verification.",
+		"logInWithFacebookString": "Log in with Facebook",
+		"logInWithGoogleString": "Log in with Google",
+		"pressBackOnceAgainString": "Press Back Once Again to Exit."
+	},
+
+	"otpScreen": {
+		"verificationString": "Verification",
+		"enterOtpString": "Enter the OTP code from the phone we just sent you.",
+		"didntGetOtpString": "Didn't receive OTP Code!",
+		"resendString": "Resend",
+		"submitString": "Submit",
+		"pleaseWaitString": "Please Wait.."
+	},
+
+	"homePage": {
+		"orderString": "Order",
+		"walletString": "Wallet",
+		"profileString": "Profile",
+		"pressBackOnceAgainString": "Press Back Once Again to Exit."
+	},
+
+	"homeMainPage": {
+		"ordersString": "Orders",
+		"newString": "New",
+		"activeString": "Active",
+		"historyString": "History"
+	},
+
+	"newOrderPage": {
+		"noNewOrdersString": "No new orders.",
+		"paymentModeString": "Payment Mode",
+		"acceptString": "Accept",
+		"paymentString": "Payment",
+		"reasonToRejectString": "Reason to Reject",
+		"writeSpecificReasonString": "Write a specific reason to reject order",
+		"enterReasonHereString": "Enter Reason Here",
+		"cancelString": "Cancel",
+		"sendString": "Send",
+		"orderString": "Order",
+		"totalString": "Total",
+		"locationString": "Location",
+		"pickupLocationString": "Pickup Location",
+		"deliveryLocationString": "Delivery Location",
+		"customerString": "Customer",
+		"nameString": "Name",
+		"phoneString": "Phone",
+		"rejectString": "Reject"
+	},
+
+	"activeOrderPage": {
+		"paymentModeString": "Payment Mode",
+		"paymentString": "Payment",
+		"orderString": "Order",
+		"totalString": "Total",
+		"locationString": "Location",
+		"pickupLocationString": "Pickup Location",
+		"deliveryLocationString": "Delivery Location",
+		"customerString": "Customer",
+		"nameString": "Name",
+		"phoneString": "Phone",
+		"startString": "Start"
+	},
+
+	"historyPage": {
+		"paymentModeString": "Payment Mode",
+		"deliveredString": "Delivered",
+		"paymentString": "Payment"
+	},
+
+	"mapPage": {
+		"mapString": "Map",
+		"finishString": "Finish",
+		"orderString": "Order",
+		"totalString": "Total",
+		"locationString": "Location",
+		"pickupLocationString": "Pickup Location",
+		"deliveryLocationString": "Delivery Location",
+		"customerString": "Customer",
+		"nameString": "Name",
+		"phoneString": "Phone",
+		"paymentString": "Payment",
+		"okayString": "Okay",
+		"congratulationString": "Congratulation! Order Completed."
+	},
+
+	"walletPage": {
+		"earningString": "Earning"
+	},
+
+	"profilePage": {
+		"profileString": "Profile",
+		"notificationsString": "Notifications",
+		"languageString": "Language",
+		"settingsString": "Settings",
+		"inviteFriendsString": "Invite Friends",
+		"supportString": "Support",
+		"logoutString": "Logout",
+		"sureLogoutString": "You sure want to logout?",
+		"cancelString": "Cancel"
+	},
+
+	"editProfilePage": {
+		"saveString": "Save",
+		"fullNameString": "Full Name",
+		"passwordString": "Password",
+		"phoneString": "Phone",
+		"emailString": "Email",
+		"chooseOptionString": "Choose Option",
+		"cameraString": "Camera",
+		"uploadFromGalleryString": "Upload from Gallery",
+		"changeFullNameString": "Change Full Name",
+		"enterYourFullNameString": "Enter Your Full Name",
+		"cancelString": "Cancel",
+		"okayString": "Okay",
+		"changeYourPasswordString": "Change Your Password",
+		"oldPasswordString": "Old Password",
+		"newPasswordString": "New Password",
+		"confirmNewPasswordString": "Confirm New Password",
+		"changePhoneNumberString": "Change Phone Number",
+		"enterPhoneNumberString": "Enter Phone Number",
+		"changeEmailString": "Change Email",
+		"enterYourEmailString": "Enter Your Email Address"
+	},
+
+	"notificationPage": {
+		"notificationsString": "Notifications",
+		"noNotificationsString": "No Notifications"
+	}
+}

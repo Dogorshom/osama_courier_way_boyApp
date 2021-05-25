@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 Color scaffoldBgColor = Color(0xFFF4F4F4);
 //Color primaryColor = Color(0xFFF2647C);
-Color primaryColor =Color(0xfffcab4f);
+Color primaryColor = Color(0xfffcab4f);
 Color secondaryColor = Color(0xffDE7C23);
 Color greyColor = Colors.grey;
 Color whiteColor = Colors.white;
@@ -10,11 +10,10 @@ Color blackColor = Colors.black;
 Color lightGreyColor = Colors.grey.withOpacity(0.3);
 Color lightPrimaryColor = primaryColor.withOpacity(0.1);
 Color darkBlueColor = Color(0xFF242E4D);
-Color myFirstColor =Color(0xffDE7C23);
-Color mySecondColor =Color(0xfffcab4f);
-Color myFirstButtonColor=Colors.yellow[200];
-Color mySecondButtonColor=Colors.white38;
-
+Color myFirstColor = Color(0xffDE7C23);
+Color mySecondColor = Color(0xfffcab4f);
+Color myFirstButtonColor = Colors.yellow[200];
+Color mySecondButtonColor = Colors.white38;
 
 const double myFixPadding = 10.0;
 const double myBoxWidth = 0.24;
@@ -159,7 +158,6 @@ TextStyle searchTextStyle = TextStyle(
 // Search History text style start
 
 // Search History text style End
-
 
 TextStyle splashBigTextStyle = TextStyle(
   color: primaryColor,
@@ -323,21 +321,30 @@ TextStyle yellowExtraLargeTextStyle = TextStyle(
   height: 1.3,
 );
 
-myErrorDialog(BuildContext context,String errorTypeString){
-  double width =MediaQuery.of(context).size.width;
+getElevatedButton(BuildContext context, String pageRoute, String buttonText) {
+  return ElevatedButton(
+      onPressed: () {
+        Navigator.of(context).pushNamed(pageRoute);
+      },
+      child: Text("$buttonText"),
+      style: ElevatedButton.styleFrom(
+          onPrimary: whiteColor, primary: secondaryColor));
+}
+
+myErrorDialog(BuildContext context, String errorTypeString) {
+  double width = MediaQuery.of(context).size.width;
   showDialog(
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
         return Dialog(
           elevation: 5.0,
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10.0)),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
           child: Container(
             decoration: BoxDecoration(
                 color: Colors.orange[200],
-                borderRadius: BorderRadius.all(Radius.circular(10))
-            ),
+                borderRadius: BorderRadius.all(Radius.circular(10))),
             // color: Colors.orange[200],
             // padding: EdgeInsets.all(20.0),
             child: Wrap(
@@ -348,7 +355,8 @@ myErrorDialog(BuildContext context,String errorTypeString){
                   children: <Widget>[
                     Padding(
                       padding: EdgeInsets.all(10.0),
-                      child: Text("$errorTypeString",
+                      child: Text(
+                        "$errorTypeString",
                         textAlign: TextAlign.center,
                         // style: blackHeadingTextStyle,
                       ),
@@ -390,5 +398,6 @@ myErrorDialog(BuildContext context,String errorTypeString){
               ],
             ),
           ),
-        );  });
+        );
+      });
 }

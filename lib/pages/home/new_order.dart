@@ -61,7 +61,7 @@ class _NewOrderState extends State<NewOrder> {
     Future getOrders() async {
       final result = await Connectivity().checkConnectivity();
       final hasInternet = result != ConnectivityResult.none;
-      // final hasInternet = showConnectivitySnackbar(result);
+
       print("hi from orders");
       print(hasInternet.toString());
       if (hasInternet) {
@@ -75,7 +75,7 @@ class _NewOrderState extends State<NewOrder> {
         var jsonData = jsonDecode(receivedData.body);
         List<Order> orders = [];
         for (var v in jsonData) {
-          Order order = Order(
+          if(v["orderStatus"]=="justOrdered" || v["orderStatus"] ==null ){Order order = Order(
               id: v["_id"],
               title: v["title"],
               description: v["description"],
@@ -85,11 +85,17 @@ class _NewOrderState extends State<NewOrder> {
               weight: v["weight"],
               pickUpLocation: v["pickUpLocation"],
               dropOffLocation: v["dropOffLocation"],
-              comment: v["comment"]);
-          orders.add(order);
+              comment: v["comment"],
+              priceWithoutDelivery:v["totalPriceWithoutDelivery"] ,
+              deliveryPrice: v["deliveryPrice"] ,
+              nameOfOrderUser: v["users_permissions_user"]["username"]??"null"
+
+          );
+          orders.add(order);}
         }
         return orders;
       } else {
+        myErrorDialog(context, "you don't have Internet Access, please connect and refresh your page");
         print("you don't have Internet Access");
       }
     }
@@ -207,26 +213,29 @@ class _NewOrderState extends State<NewOrder> {
       return null;
     }
 */
-    Future confirmOrderAndDeleteIt(String orderID) async{
+    Future confirmOrderAndUpdateItAsActive(String orderID) async {
       final result = await Connectivity().checkConnectivity();
       final hasInternet = result != ConnectivityResult.none;
-      // final hasInternet = showConnectivitySnackbar(result);
-      // print("hi from orders");
-      // print(hasInternet.toString());
+
       if (hasInternet) {
-        var url = "https://taweela-rest-api-strapi.herokuapp.com/orders/${orderID.toString()}";
-           Map<String, String> headers = {
+        var url =
+            "https://taweela-rest-api-strapi.herokuapp.com/orders/${orderID.toString()}";
+        Map<String, String> headers = {
           'Context-Type': 'application/json;Charset=UTF-8',
           'Accept': 'application/json',
         };
-        http.Response jsonData = await http.delete(Uri.parse(url),headers:headers );
+        Map<String, String> body = {
+          'orderStatus':'active'
+        };
+        http.Response jsonData =
+            await http.put(Uri.parse(url), headers: headers,body: body);
         Map receivedData = jsonDecode(jsonData.body);
-        print(receivedData["_id"]);
+        print(receivedData);
         return true;
+      }
+    }
 
-      }
-      }
-    isOrderAcceptedDialog(Order  order,) {
+    isOrderAcceptedDialog(Order order,) {
       showDialog(
         context: context,
         barrierDismissible: false,
@@ -243,7 +252,6 @@ class _NewOrderState extends State<NewOrder> {
                   height: screenHeight / 1.2,
                   child: ListView(
                     children: <Widget>[
-
                       Container(
                         width: screenWidth,
                         padding: EdgeInsets.all(fixPadding),
@@ -272,15 +280,8 @@ class _NewOrderState extends State<NewOrder> {
                       Container(
                         margin: EdgeInsets.all(fixPadding),
                         decoration: BoxDecoration(
-                          color: whiteColor,
+                          color: greyColor.withOpacity(0.2),
                           borderRadius: BorderRadius.circular(5.0),
-                          boxShadow: <BoxShadow>[
-                            BoxShadow(
-                              blurRadius: 1.5,
-                              spreadRadius: 1.5,
-                              color: Colors.grey[200],
-                            ),
-                          ],
                         ),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -314,11 +315,11 @@ class _NewOrderState extends State<NewOrder> {
                                         CrossAxisAlignment.center,
                                     children: <Widget>[
                                       Text(
-                                        'Deal 1',
+                                        'products',
                                         style: listItemTitleStyle,
                                       ),
                                       Text(
-                                        '\$430',
+                                        '\$${order.priceWithoutDelivery}',
                                         style: listItemTitleStyle,
                                       ),
                                     ],
@@ -331,11 +332,11 @@ class _NewOrderState extends State<NewOrder> {
                                         CrossAxisAlignment.center,
                                     children: <Widget>[
                                       Text(
-                                        '7up Regular 250ml',
+                                        'Tax',
                                         style: listItemTitleStyle,
                                       ),
                                       Text(
-                                        '\$80',
+                                        '\$0.0',
                                         style: listItemTitleStyle,
                                       ),
                                     ],
@@ -352,7 +353,7 @@ class _NewOrderState extends State<NewOrder> {
                                         style: listItemTitleStyle,
                                       ),
                                       Text(
-                                        '\$10',
+                                        '\$${order.deliveryPrice}',
                                         style: listItemTitleStyle,
                                       ),
                                     ],
@@ -370,7 +371,7 @@ class _NewOrderState extends State<NewOrder> {
                                         style: headingStyle,
                                       ),
                                       Text(
-                                        '\$520',
+                                        '\$${order.priceWithoutDelivery + order.deliveryPrice}',
                                         style: priceStyle,
                                       ),
                                     ],
@@ -386,15 +387,8 @@ class _NewOrderState extends State<NewOrder> {
                       Container(
                         margin: EdgeInsets.all(fixPadding),
                         decoration: BoxDecoration(
-                          color: whiteColor,
+                          color: greyColor.withOpacity(0.2),
                           borderRadius: BorderRadius.circular(5.0),
-                          boxShadow: <BoxShadow>[
-                            BoxShadow(
-                              blurRadius: 1.5,
-                              spreadRadius: 1.5,
-                              color: Colors.grey[200],
-                            ),
-                          ],
                         ),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -496,15 +490,8 @@ class _NewOrderState extends State<NewOrder> {
                       Container(
                         margin: EdgeInsets.all(fixPadding),
                         decoration: BoxDecoration(
-                          color: whiteColor,
+                          color: greyColor.withOpacity(0.2),
                           borderRadius: BorderRadius.circular(5.0),
-                          boxShadow: <BoxShadow>[
-                            BoxShadow(
-                              blurRadius: 1.5,
-                              spreadRadius: 1.5,
-                              color: Colors.grey[200],
-                            ),
-                          ],
                         ),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -543,7 +530,7 @@ class _NewOrderState extends State<NewOrder> {
                                         style: listItemTitleStyle,
                                       ),
                                       Text(
-                                        'Allison Perry',
+                                        '${order.nameOfOrderUser}',
                                         maxLines: 1,
                                         overflow: TextOverflow.ellipsis,
                                         style: listItemTitleStyle,
@@ -582,15 +569,8 @@ class _NewOrderState extends State<NewOrder> {
                       Container(
                         margin: EdgeInsets.all(fixPadding),
                         decoration: BoxDecoration(
-                          color: whiteColor,
+                          color: greyColor.withOpacity(0.2),
                           borderRadius: BorderRadius.circular(5.0),
-                          boxShadow: <BoxShadow>[
-                            BoxShadow(
-                              blurRadius: 1.5,
-                              spreadRadius: 1.5,
-                              color: Colors.grey[200],
-                            ),
-                          ],
                         ),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -654,9 +634,6 @@ class _NewOrderState extends State<NewOrder> {
                         children: <Widget>[
                           InkWell(
                             onTap: () async {
-                              /* setState(() {
-                                   orderDecision = "accepted";
-                                 });*/
                               Navigator.pop(context);
                               // await rejectReasonDialog();
                             },
@@ -676,15 +653,20 @@ class _NewOrderState extends State<NewOrder> {
                             ),
                           ),
                           InkWell(
-                            onTap: () async{
-                              bool confirmOrder = await confirmOrderAndDeleteIt(order.id)?? false;
-                              if (confirmOrder){
+                            onTap: () async {
+                              bool confirmOrder =
+                                  await confirmOrderAndUpdateItAsActive(order.id) ??
+                                      false;
+                              if (confirmOrder) {
                                 print("order successfully confirmed");
-                                Navigator.push(context,
-                                  MaterialPageRoute(
-                                      builder: (context) => HomeMain(initialIndex: 1,order: order)));}
-                              else{
-                                myErrorDialog(context, "order canceled or has been selected\n by another driver ");
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => HomeMain(
+                                            initialIndex: 1, order: order)));
+                              } else {
+                                myErrorDialog(context,
+                                    "order canceled or has been selected\n by another driver ");
                               }
                               //Navigator.pop(context);
                               //return true;
@@ -718,35 +700,28 @@ class _NewOrderState extends State<NewOrder> {
       return false;
     }
 
-    /*return (deliveryList.length == 0)
-        ? Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Icon(
-                  Icons.local_mall,
-                  color: Colors.grey,
-                  size: 60.0,
-                ),
-                SizedBox(
-                  height: 20.0,
-                ),
-                Text(
-                  AppLocalizations.of(context)
-                      .translate('newOrderPage', 'noNewOrdersString'),
-                  style: greyHeadingStyle,
-                ),
-              ],
-            ),
-          )
-        : */
     return FutureBuilder(
         future: getOrders(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           return (snapshot.data == null)
               ? Center(
-                  child: Text("no Items founded"),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "no Items founded press this button to refresh your page",
+                          style: headingStyle,
+                          textAlign: TextAlign.center,
+                        ),
+                        SizedBox(
+                          height: fixPadding * 4,
+                        ),
+                        getElevatedButton(context, "HomeMain", "Refresh Page"),
+                      ],
+                    ),
+                  ),
                 )
               : ListView.builder(
                   itemCount: snapshot.data.length,
@@ -764,13 +739,13 @@ class _NewOrderState extends State<NewOrder> {
                             decoration: BoxDecoration(
                               color: whiteColor,
                               borderRadius: BorderRadius.circular(5.0),
-                              boxShadow: <BoxShadow>[
+                             /* boxShadow: <BoxShadow>[
                                 BoxShadow(
                                   blurRadius: 1.5,
                                   spreadRadius: 1.5,
                                   color: Colors.grey[200],
                                 ),
-                              ],
+                              ],*/
                             ),
                             child: Column(
                               children: <Widget>[
@@ -794,8 +769,9 @@ class _NewOrderState extends State<NewOrder> {
                                                 size: 25.0),
                                             widthSpace,
                                             Container(
-                                              width:
-                                              (screenWidth - fixPadding * 4.0) / 1.8,
+                                              width: (screenWidth -
+                                                      fixPadding * 4.0) /
+                                                  1.8,
                                               child: Column(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.start,
@@ -804,17 +780,19 @@ class _NewOrderState extends State<NewOrder> {
                                                 children: <Widget>[
                                                   Text(order.id,
                                                       maxLines: 1,
-                                                      overflow: TextOverflow.ellipsis,
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
                                                       style: headingStyle),
                                                   heightSpace,
                                                   heightSpace,
                                                   Text(
-                                                      AppLocalizations.of(context)
+                                                      AppLocalizations.of(
+                                                              context)
                                                           .translate(
                                                               'newOrderPage',
-                                                              'paymentModeString'),
+                                                              'orderTitle'),
                                                       style: lightGreyStyle),
-                                                  Text("on Delivery",
+                                                  Text("${order.title}",
                                                       style: headingStyle),
                                                 ],
                                               ),
@@ -823,7 +801,9 @@ class _NewOrderState extends State<NewOrder> {
                                         ),
                                       ),
                                       Container(
-                                      width: (screenWidth - fixPadding * 4.0) / 3.2,
+                                        width:
+                                            (screenWidth - fixPadding * 4.0) /
+                                                3.2,
                                         child: Column(
                                           mainAxisAlignment:
                                               MainAxisAlignment.start,
@@ -843,17 +823,21 @@ class _NewOrderState extends State<NewOrder> {
                                                   ),
                                                   onPressed: () async {
                                                     bool isOrderAccepted =
-                                                        isOrderAcceptedDialog(order);
+                                                        isOrderAcceptedDialog(
+                                                            order);
                                                     if (isOrderAccepted) {
-                                                      print("order is Accepted");
+                                                      print(
+                                                          "order is Accepted");
                                                     }
                                                   },
                                                   color: primaryColor,
                                                   child: Text(
                                                     AppLocalizations.of(context)
-                                                        .translate('newOrderPage',
+                                                        .translate(
+                                                            'newOrderPage',
                                                             'acceptString'),
-                                                    style: wbuttonWhiteTextStyle,
+                                                    style:
+                                                        wbuttonWhiteTextStyle,
                                                   ),
                                                 ),
                                               ),
@@ -862,9 +846,9 @@ class _NewOrderState extends State<NewOrder> {
                                             Text(
                                                 AppLocalizations.of(context)
                                                     .translate('newOrderPage',
-                                                        'paymentString'),
+                                                        'totalPrice'),
                                                 style: lightGreyStyle),
-                                            Text('price', style: headingStyle),
+                                            Text('${order.priceWithoutDelivery + order.deliveryPrice}', style: headingStyle),
                                           ],
                                         ),
                                       ),

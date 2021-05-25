@@ -1,6 +1,7 @@
 import 'package:courierway_deliveryboy/constant/constant.dart';
 import 'package:courierway_deliveryboy/functions/change_language.dart';
 import 'package:courierway_deliveryboy/functions/localizations.dart';
+import 'package:courierway_deliveryboy/pages/home/home_main.dart';
 import 'package:courierway_deliveryboy/pages/splashScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
   final AppLanguage appLanguage;
 
   MyApp({this.appLanguage});
+
   @override
   Widget build(BuildContext context) {
     // return MaterialApp(
@@ -48,6 +50,9 @@ class MyApp extends StatelessWidget {
             primaryColor: primaryColor,
             visualDensity: VisualDensity.adaptivePlatformDensity,
           ),
+          routes: <String, WidgetBuilder>{
+            'HomeMain': (context) => HomeMain(),
+          },
           debugShowCheckedModeBanner: false,
           home: SplashScreen(),
           locale: model.appLocal,

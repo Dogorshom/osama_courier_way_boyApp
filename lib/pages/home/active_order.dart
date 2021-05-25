@@ -1,6 +1,7 @@
 import 'package:courierway_deliveryboy/constant/constant.dart';
 import 'package:courierway_deliveryboy/functions/localizations.dart';
 import 'package:courierway_deliveryboy/order/order.dart';
+import 'package:courierway_deliveryboy/pages/home/home_main.dart';
 import 'package:flutter/material.dart';
 import 'package:courierway_deliveryboy/pages/map.dart';
 
@@ -20,7 +21,21 @@ class _ActiveOrderState extends State<ActiveOrder> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-    return Scaffold(
+    return widget.order==null? Center(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text("you din't have active orders press this button to view orders",style: headingStyle,textAlign: TextAlign.center,),
+            SizedBox(height: fixPadding*4,),
+            Container(
+              child: getElevatedButton(context, "HomeMain", "View Orders"),
+            ),
+          ],
+        ),
+      )):
+    Scaffold(
       body: Container(
         width: width,
         height: height,
@@ -37,16 +52,34 @@ class _ActiveOrderState extends State<ActiveOrder> {
                 //   topLeft: Radius.circular(10.0),
                 // ),
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
+              child: Column(
                 children: [
-                  Text('ID: ',style: wbuttonWhiteTextStyle,),
-                  Text(widget.order.id??'OID123456789',
-                    maxLines: 1,
-                    overflow: TextOverflow.fade,
-                    style: wbuttonWhiteTextStyle,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text('username: ',style: wbuttonWhiteTextStyle,),
+                      Text(widget.order.nameOfOrderUser ?? "user prefer not to say his name",
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: wbuttonWhiteTextStyle,
+                      ),
+                    ],
                   ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+
+                      Text('ID: ',style: wbuttonWhiteTextStyle,),
+                      Text(widget.order.id??'OID123456789',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: wbuttonWhiteTextStyle,
+                      ),
+                    ],
+                  ),
+
                 ],
               ),
             ),
@@ -55,15 +88,8 @@ class _ActiveOrderState extends State<ActiveOrder> {
             Container(
               margin: EdgeInsets.all(fixPadding),
               decoration: BoxDecoration(
-                color: whiteColor,
+                color: greyColor.withOpacity(0.2),
                 borderRadius: BorderRadius.circular(5.0),
-                boxShadow: <BoxShadow>[
-                  BoxShadow(
-                    blurRadius: 1.5,
-                    spreadRadius: 1.5,
-                    color: Colors.grey[200],
-                  ),
-                ],
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -95,11 +121,11 @@ class _ActiveOrderState extends State<ActiveOrder> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
                             Text(
-                              'Deal 1',
+                              'subTotal',
                               style: listItemTitleStyle,
                             ),
                             Text(
-                              '\$430',
+                              '\$${widget.order.priceWithoutDelivery}',
                               style: listItemTitleStyle,
                             ),
                           ],
@@ -110,11 +136,11 @@ class _ActiveOrderState extends State<ActiveOrder> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
                             Text(
-                              '7up Regular 250ml',
+                              'Tax',
                               style: listItemTitleStyle,
                             ),
                             Text(
-                              '\$80',
+                              '\$0',
                               style: listItemTitleStyle,
                             ),
                           ],
@@ -129,7 +155,7 @@ class _ActiveOrderState extends State<ActiveOrder> {
                               style: listItemTitleStyle,
                             ),
                             Text(
-                              '\$10',
+                              '\$${widget.order.deliveryPrice}',
                               style: listItemTitleStyle,
                             ),
                           ],
@@ -145,7 +171,7 @@ class _ActiveOrderState extends State<ActiveOrder> {
                               style: headingStyle,
                             ),
                             Text(
-                              '\$520',
+                              '\$${widget.order.priceWithoutDelivery + widget.order.deliveryPrice}',
                               style: priceStyle,
                             ),
                           ],
@@ -161,15 +187,8 @@ class _ActiveOrderState extends State<ActiveOrder> {
             Container(
               margin: EdgeInsets.all(fixPadding),
               decoration: BoxDecoration(
-                color: whiteColor,
+                color: greyColor.withOpacity(0.2),
                 borderRadius: BorderRadius.circular(5.0),
-                boxShadow: <BoxShadow>[
-                  BoxShadow(
-                    blurRadius: 1.5,
-                    spreadRadius: 1.5,
-                    color: Colors.grey[200],
-                  ),
-                ],
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -258,15 +277,8 @@ class _ActiveOrderState extends State<ActiveOrder> {
             Container(
               margin: EdgeInsets.all(fixPadding),
               decoration: BoxDecoration(
-                color: whiteColor,
+                color: greyColor.withOpacity(0.2),
                 borderRadius: BorderRadius.circular(5.0),
-                boxShadow: <BoxShadow>[
-                  BoxShadow(
-                    blurRadius: 1.5,
-                    spreadRadius: 1.5,
-                    color: Colors.grey[200],
-                  ),
-                ],
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -303,7 +315,7 @@ class _ActiveOrderState extends State<ActiveOrder> {
                               style: listItemTitleStyle,
                             ),
                             Text(
-                              'Allison Perry',
+                              '${widget.order.nameOfOrderUser}',
                               style: listItemTitleStyle,
                             ),
                           ],
@@ -336,15 +348,8 @@ class _ActiveOrderState extends State<ActiveOrder> {
             Container(
               margin: EdgeInsets.all(fixPadding),
               decoration: BoxDecoration(
-                color: whiteColor,
+                color: greyColor.withOpacity(0.2),
                 borderRadius: BorderRadius.circular(5.0),
-                boxShadow: <BoxShadow>[
-                  BoxShadow(
-                    blurRadius: 1.5,
-                    spreadRadius: 1.5,
-                    color: Colors.grey[200],
-                  ),
-                ],
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,

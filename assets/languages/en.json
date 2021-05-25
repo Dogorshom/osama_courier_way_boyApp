@@ -47,9 +47,11 @@
 
 	"newOrderPage": {
 		"noNewOrdersString": "No new orders.",
+		"orderTitle": "Order Title",
 		"paymentModeString": "Payment Mode",
 		"acceptString": "Accept",
 		"paymentString": "Payment",
+		"totalPrice": "Total Price",
 		"reasonToRejectString": "Reason to Reject",
 		"writeSpecificReasonString": "Write a specific reason to reject order",
 		"enterReasonHereString": "Enter Reason Here",

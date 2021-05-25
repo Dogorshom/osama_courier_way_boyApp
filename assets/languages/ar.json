@@ -47,9 +47,11 @@
 
 	"newOrderPage": {
 		"noNewOrdersString": "لا طلبات جديدة.",
+		"orderTitle": "عنوان الطلب",
 		"paymentModeString": "طريقة الدفع",
 		"acceptString": "قبول",
 		"paymentString": "دفع",
+		"totalPrice": "المبلغ كامل",
 		"reasonToRejectString": "سبب الرفض",
 		"writeSpecificReasonString": "اكتب سببًا محددًا لرفض الطلب",
 		"enterReasonHereString": "أدخل السبب هنا",

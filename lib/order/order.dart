@@ -9,9 +9,10 @@ class Order {
   String pickUpLocation;
   String dropOffLocation;
   String comment;
-  String price;
   String nameOfOrderUser;
-  double phoneNumberOfOrderUser;
+  int    priceWithoutDelivery;
+  int    deliveryPrice;
+  String phoneNumberOfOrderUser;
 
   Order(
       {
@@ -25,7 +26,8 @@ class Order {
       this.pickUpLocation,
       this.dropOffLocation,
       this.comment,
-      this.price,
+      this.priceWithoutDelivery,
+      this.deliveryPrice,
       this.nameOfOrderUser,
       this.phoneNumberOfOrderUser});
 }

@@ -1,6 +1,14 @@
+import 'dart:convert';
+
+import 'package:connectivity/connectivity.dart';
 import 'package:courierway_deliveryboy/constant/constant.dart';
+import 'package:courierway_deliveryboy/order/order.dart';
 import 'package:courierway_deliveryboy/functions/localizations.dart';
+import 'package:courierway_deliveryboy/pages/home/active_order.dart';
+import 'package:courierway_deliveryboy/pages/home/home_main.dart';
+import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 class NewOrder extends StatefulWidget {
   @override
@@ -8,7 +16,7 @@ class NewOrder extends StatefulWidget {
 }
 
 class _NewOrderState extends State<NewOrder> {
-  final deliveryList = [
+  /*final deliveryList = [
     {
       'orderId': 'OID123456789',
       'paymentMode': 'Cash on Delivery',
@@ -44,12 +52,50 @@ class _NewOrderState extends State<NewOrder> {
       'restaurantAddress': '29 Bar Street',
       'deliveryAddress': '56 Andheri East'
     }
-  ];
+  ];*/
+
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
-    rejectreasonDialog() {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+    Future getOrders() async {
+      final result = await Connectivity().checkConnectivity();
+      final hasInternet = result != ConnectivityResult.none;
+      // final hasInternet = showConnectivitySnackbar(result);
+      print("hi from orders");
+      print(hasInternet.toString());
+      if (hasInternet) {
+        var url = "https://taweela-rest-api-strapi.herokuapp.com/orders";
+        /*   Map<String, String> headers = {
+          'Context-Type': 'application/json;Charset=UTF-8',
+          'Accept': 'application/json',
+        };*/
+        http.Response receivedData = await http.get(Uri.parse(url));
+        print(receivedData.body);
+        var jsonData = jsonDecode(receivedData.body);
+        List<Order> orders = [];
+        for (var v in jsonData) {
+          Order order = Order(
+              id: v["_id"],
+              title: v["title"],
+              description: v["description"],
+              height: v["height"],
+              width: v["screenWidth"],
+              depth: v["depth"],
+              weight: v["weight"],
+              pickUpLocation: v["pickUpLocation"],
+              dropOffLocation: v["dropOffLocation"],
+              comment: v["comment"]);
+          orders.add(order);
+        }
+        return orders;
+      } else {
+        print("you don't have Internet Access");
+      }
+    }
+
+/*
+    Future rejectReasonDialog() {
       showDialog(
         context: context,
         barrierDismissible: false,
@@ -66,7 +112,7 @@ class _NewOrderState extends State<NewOrder> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Container(
-                      width: width,
+                      screenWidth: screenWidth,
                       padding: EdgeInsets.all(fixPadding),
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
@@ -89,7 +135,7 @@ class _NewOrderState extends State<NewOrder> {
                           'newOrderPage', 'writeSpecificReasonString')),
                     ),
                     Container(
-                      width: width,
+                      screenWidth: screenWidth,
                       padding: EdgeInsets.all(fixPadding),
                       child: TextField(
                         keyboardType: TextInputType.multiline,
@@ -115,7 +161,7 @@ class _NewOrderState extends State<NewOrder> {
                             Navigator.pop(context);
                           },
                           child: Container(
-                            width: (width / 3.5),
+                            screenWidth: (screenWidth / 3.5),
                             alignment: Alignment.center,
                             padding: EdgeInsets.all(10.0),
                             decoration: BoxDecoration(
@@ -134,7 +180,7 @@ class _NewOrderState extends State<NewOrder> {
                             Navigator.pop(context);
                           },
                           child: Container(
-                            width: (width / 3.5),
+                            screenWidth: (screenWidth / 3.5),
                             alignment: Alignment.center,
                             padding: EdgeInsets.all(10.0),
                             decoration: BoxDecoration(
@@ -158,9 +204,29 @@ class _NewOrderState extends State<NewOrder> {
           );
         },
       );
+      return null;
     }
+*/
+    Future confirmOrderAndDeleteIt(String orderID) async{
+      final result = await Connectivity().checkConnectivity();
+      final hasInternet = result != ConnectivityResult.none;
+      // final hasInternet = showConnectivitySnackbar(result);
+      // print("hi from orders");
+      // print(hasInternet.toString());
+      if (hasInternet) {
+        var url = "https://taweela-rest-api-strapi.herokuapp.com/orders/${orderID.toString()}";
+           Map<String, String> headers = {
+          'Context-Type': 'application/json;Charset=UTF-8',
+          'Accept': 'application/json',
+        };
+        http.Response jsonData = await http.delete(Uri.parse(url),headers:headers );
+        Map receivedData = jsonDecode(jsonData.body);
+        print(receivedData["_id"]);
+        return true;
 
-    orderAcceptDialog(index) {
+      }
+      }
+    isOrderAcceptedDialog(Order  order,) {
       showDialog(
         context: context,
         barrierDismissible: false,
@@ -173,12 +239,13 @@ class _NewOrderState extends State<NewOrder> {
             child: Wrap(
               children: <Widget>[
                 Container(
-                  width: width,
-                  height: height / 1.2,
+                  width: screenWidth,
+                  height: screenHeight / 1.2,
                   child: ListView(
                     children: <Widget>[
+
                       Container(
-                        width: width,
+                        width: screenWidth,
                         padding: EdgeInsets.all(fixPadding),
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
@@ -188,9 +255,16 @@ class _NewOrderState extends State<NewOrder> {
                             topLeft: Radius.circular(10.0),
                           ),
                         ),
-                        child: Text(
-                          'OID123456789',
-                          style: wbuttonWhiteTextStyle,
+                        child: Container(
+                          width: screenWidth,
+                          child: Center(
+                            child: Text(
+                              'ID: ${order.id}',
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: wbuttonWhiteTextStyle,
+                            ),
+                          ),
                         ),
                       ),
 
@@ -355,7 +429,8 @@ class _NewOrderState extends State<NewOrder> {
                                     children: <Widget>[
                                       Container(
                                         width:
-                                            ((width - fixPadding * 13) / 2.0),
+                                            ((screenWidth - fixPadding * 13) /
+                                                2.0),
                                         child: Text(
                                           AppLocalizations.of(context)
                                               .translate('newOrderPage',
@@ -366,9 +441,10 @@ class _NewOrderState extends State<NewOrder> {
                                       widthSpace,
                                       Container(
                                         width:
-                                            ((width - fixPadding * 13) / 2.0),
+                                            ((screenWidth - fixPadding * 13) /
+                                                2.0),
                                         child: Text(
-                                          '28 Mott Stret',
+                                          '${order.pickUpLocation}',
                                           maxLines: 1,
                                           overflow: TextOverflow.ellipsis,
                                           style: listItemTitleStyle,
@@ -385,7 +461,8 @@ class _NewOrderState extends State<NewOrder> {
                                     children: <Widget>[
                                       Container(
                                         width:
-                                            ((width - fixPadding * 13) / 2.0),
+                                            ((screenWidth - fixPadding * 13) /
+                                                2.0),
                                         child: Text(
                                           AppLocalizations.of(context)
                                               .translate('newOrderPage',
@@ -396,9 +473,10 @@ class _NewOrderState extends State<NewOrder> {
                                       widthSpace,
                                       Container(
                                         width:
-                                            ((width - fixPadding * 13) / 2.0),
+                                            ((screenWidth - fixPadding * 13) /
+                                                2.0),
                                         child: Text(
-                                          '56 Andheri East',
+                                          '${order.dropOffLocation}',
                                           maxLines: 2,
                                           overflow: TextOverflow.ellipsis,
                                           style: listItemTitleStyle,
@@ -466,6 +544,8 @@ class _NewOrderState extends State<NewOrder> {
                                       ),
                                       Text(
                                         'Allison Perry',
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
                                         style: listItemTitleStyle,
                                       ),
                                     ],
@@ -484,6 +564,8 @@ class _NewOrderState extends State<NewOrder> {
                                       ),
                                       Text(
                                         '123456789',
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
                                         style: listItemTitleStyle,
                                       ),
                                     ],
@@ -571,15 +653,15 @@ class _NewOrderState extends State<NewOrder> {
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: <Widget>[
                           InkWell(
-                            onTap: () {
-                              setState(() {
-                                deliveryList.removeAt(index);
-                              });
+                            onTap: () async {
+                              /* setState(() {
+                                   orderDecision = "accepted";
+                                 });*/
                               Navigator.pop(context);
-                              rejectreasonDialog();
+                              // await rejectReasonDialog();
                             },
                             child: Container(
-                              width: (width / 3.5),
+                              width: (screenWidth / 3.5),
                               alignment: Alignment.center,
                               padding: EdgeInsets.all(10.0),
                               decoration: BoxDecoration(
@@ -594,14 +676,21 @@ class _NewOrderState extends State<NewOrder> {
                             ),
                           ),
                           InkWell(
-                            onTap: () {
-                              setState(() {
-                                deliveryList.removeAt(index);
-                              });
-                              Navigator.pop(context);
+                            onTap: () async{
+                              bool confirmOrder = await confirmOrderAndDeleteIt(order.id)?? false;
+                              if (confirmOrder){
+                                print("order successfully confirmed");
+                                Navigator.push(context,
+                                  MaterialPageRoute(
+                                      builder: (context) => HomeMain(initialIndex: 1,order: order)));}
+                              else{
+                                myErrorDialog(context, "order canceled or has been selected\n by another driver ");
+                              }
+                              //Navigator.pop(context);
+                              //return true;
                             },
                             child: Container(
-                              width: (width / 3.5),
+                              width: (screenWidth / 3.5),
                               alignment: Alignment.center,
                               padding: EdgeInsets.all(10.0),
                               decoration: BoxDecoration(
@@ -626,9 +715,10 @@ class _NewOrderState extends State<NewOrder> {
           );
         },
       );
+      return false;
     }
 
-    return (deliveryList.length == 0)
+    /*return (deliveryList.length == 0)
         ? Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -650,166 +740,207 @@ class _NewOrderState extends State<NewOrder> {
               ],
             ),
           )
-        : ListView.builder(
-            itemCount: deliveryList.length,
-            physics: BouncingScrollPhysics(),
-            itemBuilder: (context, index) {
-              final item = deliveryList[index];
-              return Container(
-                padding: EdgeInsets.all(fixPadding),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Container(
-                      decoration: BoxDecoration(
-                        color: whiteColor,
-                        borderRadius: BorderRadius.circular(5.0),
-                        boxShadow: <BoxShadow>[
-                          BoxShadow(
-                            blurRadius: 1.5,
-                            spreadRadius: 1.5,
-                            color: Colors.grey[200],
-                          ),
-                        ],
-                      ),
+        : */
+    return FutureBuilder(
+        future: getOrders(),
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          return (snapshot.data == null)
+              ? Center(
+                  child: Text("no Items founded"),
+                )
+              : ListView.builder(
+                  itemCount: snapshot.data.length,
+                  physics: BouncingScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    Order order = snapshot.data[index];
+                    // final item = deliveryList[index];
+                    return Container(
+                      padding: EdgeInsets.all(fixPadding),
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
-                          Padding(
-                            padding: EdgeInsets.all(fixPadding),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    Icon(Icons.fastfood,
-                                        color: primaryColor, size: 25.0),
-                                    widthSpace,
-                                    Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: <Widget>[
-                                        Text(item['orderId'],
-                                            style: headingStyle),
-                                        heightSpace,
-                                        heightSpace,
-                                        Text(
-                                            AppLocalizations.of(context)
-                                                .translate('newOrderPage',
-                                                    'paymentModeString'),
-                                            style: lightGreyStyle),
-                                        Text(item['paymentMode'],
-                                            style: headingStyle),
-                                      ],
-                                    ),
-                                  ],
+                          Container(
+                            decoration: BoxDecoration(
+                              color: whiteColor,
+                              borderRadius: BorderRadius.circular(5.0),
+                              boxShadow: <BoxShadow>[
+                                BoxShadow(
+                                  blurRadius: 1.5,
+                                  spreadRadius: 1.5,
+                                  color: Colors.grey[200],
                                 ),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    Container(
-                                      child: SizedBox(
-                                        height: 40.0,
-                                        width: 100.0,
-                                        child: RaisedButton(
-                                          elevation: 0.0,
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(5.0),
-                                          ),
-                                          onPressed: () {
-                                            orderAcceptDialog(index);
-                                          },
-                                          color: primaryColor,
-                                          child: Text(
-                                            AppLocalizations.of(context)
-                                                .translate('newOrderPage',
-                                                    'acceptString'),
-                                            style: wbuttonWhiteTextStyle,
-                                          ),
+                              ],
+                            ),
+                            child: Column(
+                              children: <Widget>[
+                                Padding(
+                                  padding: EdgeInsets.all(fixPadding),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      Expanded(
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            Icon(Icons.fastfood,
+                                                color: primaryColor,
+                                                size: 25.0),
+                                            widthSpace,
+                                            Container(
+                                              width:
+                                              (screenWidth - fixPadding * 4.0) / 1.8,
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: <Widget>[
+                                                  Text(order.id,
+                                                      maxLines: 1,
+                                                      overflow: TextOverflow.ellipsis,
+                                                      style: headingStyle),
+                                                  heightSpace,
+                                                  heightSpace,
+                                                  Text(
+                                                      AppLocalizations.of(context)
+                                                          .translate(
+                                                              'newOrderPage',
+                                                              'paymentModeString'),
+                                                      style: lightGreyStyle),
+                                                  Text("on Delivery",
+                                                      style: headingStyle),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
-                                    ),
-                                    heightSpace,
-                                    Text(
-                                        AppLocalizations.of(context).translate(
-                                            'newOrderPage', 'paymentString'),
-                                        style: lightGreyStyle),
-                                    Text('\$ ${item['payment']}',
-                                        style: headingStyle),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                          Container(
-                            padding: EdgeInsets.all(fixPadding),
-                            decoration: BoxDecoration(
-                              color: lightGreyColor,
-                              borderRadius: BorderRadius.only(
-                                bottomRight: Radius.circular(5.0),
-                                bottomLeft: Radius.circular(5.0),
-                              ),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Container(
-                                  width: (width - fixPadding * 4.0) / 3.2,
-                                  child: Text(
-                                    item['restaurantAddress'],
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: buttonBlackTextStyle,
+                                      Container(
+                                      width: (screenWidth - fixPadding * 4.0) / 3.2,
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            Container(
+                                              child: SizedBox(
+                                                height: 40.0,
+                                                width: 100.0,
+                                                child: RaisedButton(
+                                                  elevation: 0.0,
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5.0),
+                                                  ),
+                                                  onPressed: () async {
+                                                    bool isOrderAccepted =
+                                                        isOrderAcceptedDialog(order);
+                                                    if (isOrderAccepted) {
+                                                      print("order is Accepted");
+                                                    }
+                                                  },
+                                                  color: primaryColor,
+                                                  child: Text(
+                                                    AppLocalizations.of(context)
+                                                        .translate('newOrderPage',
+                                                            'acceptString'),
+                                                    style: wbuttonWhiteTextStyle,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            heightSpace,
+                                            Text(
+                                                AppLocalizations.of(context)
+                                                    .translate('newOrderPage',
+                                                        'paymentString'),
+                                                style: lightGreyStyle),
+                                            Text('price', style: headingStyle),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: <Widget>[
-                                    Icon(
-                                      Icons.location_on,
-                                      color: primaryColor,
-                                      size: 20.0,
-                                    ),
-                                    getDot(),
-                                    getDot(),
-                                    getDot(),
-                                    getDot(),
-                                    getDot(),
-                                    Icon(
-                                      Icons.navigation,
-                                      color: primaryColor,
-                                      size: 20.0,
-                                    ),
-                                  ],
-                                ),
                                 Container(
-                                  width: (width - fixPadding * 4.0) / 3.2,
-                                  child: Text(
-                                    item['deliveryAddress'],
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: buttonBlackTextStyle,
+                                  padding: EdgeInsets.all(fixPadding),
+                                  decoration: BoxDecoration(
+                                    color: lightGreyColor,
+                                    borderRadius: BorderRadius.only(
+                                      bottomRight: Radius.circular(5.0),
+                                      bottomLeft: Radius.circular(5.0),
+                                    ),
                                   ),
-                                )
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: <Widget>[
+                                      Container(
+                                        width:
+                                            (screenWidth - fixPadding * 4.0) /
+                                                3.2,
+                                        child: Text(
+                                          '${order.pickUpLocation}',
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: buttonBlackTextStyle,
+                                        ),
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: <Widget>[
+                                          Icon(
+                                            Icons.location_on,
+                                            color: primaryColor,
+                                            size: 20.0,
+                                          ),
+                                          getDot(),
+                                          getDot(),
+                                          getDot(),
+                                          getDot(),
+                                          getDot(),
+                                          Icon(
+                                            Icons.navigation,
+                                            color: primaryColor,
+                                            size: 20.0,
+                                          ),
+                                        ],
+                                      ),
+                                      Container(
+                                        width:
+                                            (screenWidth - fixPadding * 4.0) /
+                                                3.2,
+                                        child: Text(
+                                          '${order.dropOffLocation}',
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: buttonBlackTextStyle,
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
                               ],
                             ),
                           ),
                         ],
                       ),
-                    ),
-                  ],
-                ),
-              );
-            },
-          );
+                    );
+                  },
+                );
+        });
   }
 
   getDot() {

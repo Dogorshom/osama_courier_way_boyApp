@@ -322,3 +322,73 @@ TextStyle yellowExtraLargeTextStyle = TextStyle(
   fontSize: 40.0,
   height: 1.3,
 );
+
+myErrorDialog(BuildContext context,String errorTypeString){
+  double width =MediaQuery.of(context).size.width;
+  showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return Dialog(
+          elevation: 5.0,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10.0)),
+          child: Container(
+            decoration: BoxDecoration(
+                color: Colors.orange[200],
+                borderRadius: BorderRadius.all(Radius.circular(10))
+            ),
+            // color: Colors.orange[200],
+            // padding: EdgeInsets.all(20.0),
+            child: Wrap(
+              children: <Widget>[
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Padding(
+                      padding: EdgeInsets.all(10.0),
+                      child: Text("$errorTypeString",
+                        textAlign: TextAlign.center,
+                        // style: blackHeadingTextStyle,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(right: 10.0, left: 10.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: <Widget>[
+                          InkWell(
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
+                            child: Container(
+                              width: (width / 3.5),
+                              alignment: Alignment.center,
+                              padding: EdgeInsets.all(10.0),
+                              decoration: BoxDecoration(
+                                color: Colors.grey[300],
+                                borderRadius: BorderRadius.circular(5.0),
+                              ),
+                              child: Text(
+                                "close",
+                                // style: blackBottonTextStyle,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20.0,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        );  });
+}

@@ -24,6 +24,8 @@ class _HomeState extends State<Home> {
   }
 
   void changePage(int index) {
+    // print("currIndex = " );
+    print(currentIndex);
     setState(() {
       currentIndex = index;
     });
@@ -32,67 +34,67 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // bottomNavigationBar: BubbleBottomBar(
-      //   //backgroundColor: Theme.of(context).appBarTheme.color,
-      //   backgroundColor: secondaryColor,
-      //   hasNotch: false,
-      //   opacity: 0.2,
-      //   currentIndex: currentIndex,
-      //   onTap: changePage,
-      //   /*borderRadius: BorderRadius.vertical(
-      //       top: Radius.circular(
-      //           16)), *///border radius doesn't work when the notch is enabled.
-      //   elevation: 8,
-      //   items: <BubbleBottomBarItem>[
-      //     BubbleBottomBarItem(
-      //       backgroundColor: whiteColor,
-      //       icon: Icon(
-      //         Icons.local_mall,
-      //         color: whiteColor,
-      //       ),
-      //       activeIcon: Icon(
-      //         Icons.local_mall,
-      //         color: whiteColor,
-      //       ),
-      //       title: Text(
-      //         AppLocalizations.of(context).translate('homePage', 'orderString'),
-      //         style: bottomBarItemStyle,
-      //       ),
-      //     ),
-      //     BubbleBottomBarItem(
-      //       backgroundColor: whiteColor,
-      //       icon: Icon(
-      //         Icons.account_balance_wallet,
-      //         color: whiteColor,
-      //       ),
-      //       activeIcon: Icon(
-      //         Icons.account_balance_wallet,
-      //         color: whiteColor,
-      //       ),
-      //       title: Text(
-      //         AppLocalizations.of(context)
-      //             .translate('homePage', 'walletString'),
-      //         style: bottomBarItemStyle,
-      //       ),
-      //     ),
-      //     BubbleBottomBarItem(
-      //       backgroundColor: whiteColor,
-      //       icon: Icon(
-      //         Icons.person,
-      //         color: whiteColor,
-      //       ),
-      //       activeIcon: Icon(
-      //         Icons.person,
-      //         color: whiteColor,
-      //       ),
-      //       title: Text(
-      //         AppLocalizations.of(context)
-      //             .translate('homePage', 'profileString'),
-      //         style: bottomBarItemStyle,
-      //       ),
-      //     ),
-      //   ],
-      // ),
+      bottomNavigationBar: BubbleBottomBar(
+        //backgroundColor: Theme.of(context).appBarTheme.color,
+        backgroundColor: secondaryColor,
+        hasNotch: false,
+        opacity: 0.2,
+        currentIndex: currentIndex,
+        onTap: changePage,
+        /*borderRadius: BorderRadius.vertical(
+            top: Radius.circular(
+                16)), *///border radius doesn't work when the notch is enabled.
+        elevation: 8,
+        items: <BubbleBottomBarItem>[
+          BubbleBottomBarItem(
+            backgroundColor: whiteColor,
+            icon: Icon(
+              Icons.local_mall,
+              color: whiteColor,
+            ),
+            activeIcon: Icon(
+              Icons.local_mall,
+              color: whiteColor,
+            ),
+            title: Text(
+              AppLocalizations.of(context).translate('homePage', 'orderString'),
+              style: bottomBarItemStyle,
+            ),
+          ),
+          BubbleBottomBarItem(
+            backgroundColor: whiteColor,
+            icon: Icon(
+              Icons.account_balance_wallet,
+              color: whiteColor,
+            ),
+            activeIcon: Icon(
+              Icons.account_balance_wallet,
+              color: whiteColor,
+            ),
+            title: Text(
+              AppLocalizations.of(context)
+                  .translate('homePage', 'walletString'),
+              style: bottomBarItemStyle,
+            ),
+          ),
+          BubbleBottomBarItem(
+            backgroundColor: whiteColor,
+            icon: Icon(
+              Icons.person,
+              color: whiteColor,
+            ),
+            activeIcon: Icon(
+              Icons.person,
+              color: whiteColor,
+            ),
+            title: Text(
+              AppLocalizations.of(context)
+                  .translate('homePage', 'profileString'),
+              style: bottomBarItemStyle,
+            ),
+          ),
+        ],
+      ),
       body: WillPopScope(
         child: (currentIndex == 0)
             ? HomeMain(initialIndex: 0,)

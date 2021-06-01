@@ -13,7 +13,6 @@ class Order {
   int    priceWithoutDelivery;
   int    deliveryPrice;
   String phoneNumberOfOrderUser;
-
   Order(
       {
       this.id,

@@ -88,7 +88,8 @@ class _NewOrderState extends State<NewOrder> {
               comment: v["comment"],
               priceWithoutDelivery:v["totalPriceWithoutDelivery"] ,
               deliveryPrice: v["deliveryPrice"] ,
-              nameOfOrderUser: v["users_permissions_user"]["username"]??"null"
+              nameOfOrderUser: v["nameOfOrderUser"]??"null",
+              phoneNumberOfOrderUser: v["phoneNumberOfOrderUser"]??"null"
 
           );
           orders.add(order);}
@@ -550,7 +551,7 @@ class _NewOrderState extends State<NewOrder> {
                                         style: listItemTitleStyle,
                                       ),
                                       Text(
-                                        '123456789',
+                                        '${order.phoneNumberOfOrderUser}',
                                         maxLines: 1,
                                         overflow: TextOverflow.ellipsis,
                                         style: listItemTitleStyle,

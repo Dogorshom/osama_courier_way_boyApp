@@ -25,16 +25,17 @@ class _HomeMainState extends State<HomeMain> {
   int currentIndex;
   DateTime currentBackPressTime;
   @override
-  void initState() {
+ /* void initState() {
     super.initState();
     currentIndex = 0;
-  }
+  }*/
 
-  void changePage(int index) {
+  /*void changePage(int index) {
+    print(currentIndex);
     setState(() {
       currentIndex = index;
     });
-  }
+  }*/
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -80,67 +81,67 @@ class _HomeMainState extends State<HomeMain> {
             ],
           ),
         ),
-        bottomNavigationBar: BubbleBottomBar(
-          //backgroundColor: Theme.of(context).appBarTheme.color,
-          backgroundColor: secondaryColor,
-          hasNotch: false,
-          opacity: 0.2,
-          currentIndex: currentIndex,
-          onTap: changePage,
-          /*borderRadius: BorderRadius.vertical(
-            top: Radius.circular(
-                16)), *///border radius doesn't work when the notch is enabled.
-          elevation: 8,
-          items: <BubbleBottomBarItem>[
-            BubbleBottomBarItem(
-              backgroundColor: whiteColor,
-              icon: Icon(
-                Icons.local_mall,
-                color: whiteColor,
-              ),
-              activeIcon: Icon(
-                Icons.local_mall,
-                color: whiteColor,
-              ),
-              title: Text(
-                AppLocalizations.of(context).translate('homePage', 'orderString'),
-                style: bottomBarItemStyle,
-              ),
-            ),
-            BubbleBottomBarItem(
-              backgroundColor: whiteColor,
-              icon: Icon(
-                Icons.account_balance_wallet,
-                color: whiteColor,
-              ),
-              activeIcon: Icon(
-                Icons.account_balance_wallet,
-                color: whiteColor,
-              ),
-              title: Text(
-                AppLocalizations.of(context)
-                    .translate('homePage', 'walletString'),
-                style: bottomBarItemStyle,
-              ),
-            ),
-            BubbleBottomBarItem(
-              backgroundColor: whiteColor,
-              icon: Icon(
-                Icons.person,
-                color: whiteColor,
-              ),
-              activeIcon: Icon(
-                Icons.person,
-                color: whiteColor,
-              ),
-              title: Text(
-                AppLocalizations.of(context)
-                    .translate('homePage', 'profileString'),
-                style: bottomBarItemStyle,
-              ),
-            ),
-          ],
-        ),
+        // bottomNavigationBar: BubbleBottomBar(
+        //   //backgroundColor: Theme.of(context).appBarTheme.color,
+        //   backgroundColor: secondaryColor,
+        //   hasNotch: false,
+        //   opacity: 0.2,
+        //   currentIndex: currentIndex,
+        //   onTap: changePage,
+        //   /*borderRadius: BorderRadius.vertical(
+        //     top: Radius.circular(
+        //         16)), *///border radius doesn't work when the notch is enabled.
+        //   elevation: 8,
+        //   items: <BubbleBottomBarItem>[
+        //     BubbleBottomBarItem(
+        //       backgroundColor: whiteColor,
+        //       icon: Icon(
+        //         Icons.local_mall,
+        //         color: whiteColor,
+        //       ),
+        //       activeIcon: Icon(
+        //         Icons.local_mall,
+        //         color: whiteColor,
+        //       ),
+        //       title: Text(
+        //         AppLocalizations.of(context).translate('homePage', 'orderString'),
+        //         style: bottomBarItemStyle,
+        //       ),
+        //     ),
+        //     BubbleBottomBarItem(
+        //       backgroundColor: whiteColor,
+        //       icon: Icon(
+        //         Icons.account_balance_wallet,
+        //         color: whiteColor,
+        //       ),
+        //       activeIcon: Icon(
+        //         Icons.account_balance_wallet,
+        //         color: whiteColor,
+        //       ),
+        //       title: Text(
+        //         AppLocalizations.of(context)
+        //             .translate('homePage', 'walletString'),
+        //         style: bottomBarItemStyle,
+        //       ),
+        //     ),
+        //     BubbleBottomBarItem(
+        //       backgroundColor: whiteColor,
+        //       icon: Icon(
+        //         Icons.person,
+        //         color: whiteColor,
+        //       ),
+        //       activeIcon: Icon(
+        //         Icons.person,
+        //         color: whiteColor,
+        //       ),
+        //       title: Text(
+        //         AppLocalizations.of(context)
+        //             .translate('homePage', 'profileString'),
+        //         style: bottomBarItemStyle,
+        //       ),
+        //     ),
+        //   ],
+        // ),
         body: TabBarView(
           children: [
             NewOrder(),

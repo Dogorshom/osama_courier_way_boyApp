@@ -1,6 +1,7 @@
 import 'package:courierway_deliveryboy/constant/constant.dart';
 import 'package:courierway_deliveryboy/functions/localizations.dart';
 import 'package:courierway_deliveryboy/order/order.dart';
+import 'package:courierway_deliveryboy/pages/home.dart';
 import 'package:courierway_deliveryboy/pages/home/home_main.dart';
 import 'package:flutter/material.dart';
 import 'package:courierway_deliveryboy/pages/map.dart';
@@ -27,10 +28,10 @@ class _ActiveOrderState extends State<ActiveOrder> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("you din't have active orders press this button to view orders",style: headingStyle,textAlign: TextAlign.center,),
+            Text("you didn't have active orders press this button to view orders",style: headingStyle,textAlign: TextAlign.center,),
             SizedBox(height: fixPadding*4,),
             Container(
-              child: getElevatedButton(context, "HomeMain", "View Orders"),
+              child:getElevatedButton(context, "Home", "View Orders")
             ),
           ],
         ),
@@ -331,7 +332,7 @@ class _ActiveOrderState extends State<ActiveOrder> {
                               style: listItemTitleStyle,
                             ),
                             Text(
-                              '123456789',
+                              '${widget.order.phoneNumberOfOrderUser}',
                               style: listItemTitleStyle,
                             ),
                           ],
